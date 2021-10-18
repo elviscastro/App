@@ -10,7 +10,7 @@ const CadastroUsuario = () => (
   <SafeAreaView style={styles.container}>
     <View>
       <Text style={styles.title}>
-        Cadastro
+        Cadastro de Usuarios
       </Text>
     </View>
   </SafeAreaView>

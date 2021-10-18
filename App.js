@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CadastroUsuario from './screens/CadastroUsuario'
 import ListaContatos from './screens/ListaContatos'
+import CadastroContato from './screens/CadastroContato'
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput } from 'react-native';
 
 const Separator = () => (
@@ -13,26 +14,18 @@ function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
     <View>
-      <Text style={styles.title}>
-        login
-        <br />
-        <TextInput
-          style={styles.input}
-        />
-        <br />
-        senha
-        <br />
-        <TextInput
-          style={styles.input}
-        />
-      </Text>
+      <Text style={styles.title}>login</Text>
+      <TextInput style={styles.input} />
+      <Text style={styles.title}>senha</Text>
+      <TextInput style={styles.input} />
       <Button
         title="Login"
         onPress={() => navigation.navigate('ListaContatos')}
       />
-      <Separator />
+      <br />
       <Button
-        title="Cadastro"
+        title="Cadastre-se"
+        color="red"
         onPress={() => navigation.navigate('CadastroUsuario')}
       />
     </View>
@@ -49,6 +42,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="CadastroUsuario" component={CadastroUsuario} />
         <Stack.Screen name="ListaContatos" component={ListaContatos} />
+        <Stack.Screen name="CadastroContato" component={CadastroContato} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -61,7 +55,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    textAlign: 'center',
+    fontSize: 30,
+    textAlign: 'left',
+    padding: 10,
     marginVertical: 8,
   },
   fixToText: {
