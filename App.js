@@ -17,7 +17,7 @@ function HomeScreen({ navigation }) {
       <Text style={styles.title}>login</Text>
       <TextInput style={styles.input} />
       <Text style={styles.title}>senha</Text>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} secureTextEntry={true} />
       <Button
         title="Login"
         onPress={() => navigation.navigate('ListaContatos')}
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    margin: 12,
     textAlign: 'left',
-    padding: 10,
     marginVertical: 8,
   },
   fixToText: {
