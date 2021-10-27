@@ -45,6 +45,7 @@ function HomeScreen({ navigation }) {
     signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
         const user = userCredential.user;
+        navigation.navigate('ListaContatos');
       })
       .catch((error) => {
         const errorCode = error.code;
