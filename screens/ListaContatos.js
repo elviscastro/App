@@ -39,6 +39,11 @@ export default function ListaContatos({ navigation }) {
         title="Cadastro de Contato"
         onPress={() => navigation.navigate('CadastroContato')}
       />
+      <br />
+      <Button
+        title="Alterar/Excluir"
+        onPress={() => navigation.navigate('AlterarExcluirContato')}
+      />
     </View>
   );
 

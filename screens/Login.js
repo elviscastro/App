@@ -2,9 +2,9 @@ import * as React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput } from 'react-native';
 import { initializeApp } from "firebase/app";
 import { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 
-export default function CadastroUsuario({ navigation }) {
+export default function Login({ navigation }) {
   
     const [email,setEmail] = useState("");
     const [senha,setSenha] = useState("");
@@ -21,12 +21,12 @@ export default function CadastroUsuario({ navigation }) {
   
     const app = initializeApp(firebaseConfig);
   
-    function cadastrarFirebase(){
+    function loginFirebase(){
       const auth = getAuth();
-      createUserWithEmailAndPassword(auth, email, senha)
+      signInWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
           const user = userCredential.user;
-          navigation.navigate('Login');
+          navigation.navigate('ListaContatos');
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -41,10 +41,15 @@ export default function CadastroUsuario({ navigation }) {
         <TextInput style={styles.input} value={email} onChangeText={email => setEmail(email)} />
         <Text style={styles.title}>senha</Text>
         <TextInput style={styles.input} secureTextEntry={true} value={senha} onChangeText={senha => setSenha(senha)} />
+        <Button
+          title="Login"
+          onPress={() => {loginFirebase()}}
+        />
         <br />
         <Button
-          title="Salvar"
-          onPress={() => {cadastrarFirebase()}}
+          title="Cadastre-se"
+          color="red"
+          onPress={() => navigation.navigate('CadastroUsuario')}
         />
       </View>
     </SafeAreaView>

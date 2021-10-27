@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput } from 'react-native';
 
-export default function CadastroContato({ navigation }) {
+export default function AlterarExcluirContato({ navigation }) {
   
   return (
     <SafeAreaView style={styles.container}>
@@ -14,7 +14,12 @@ export default function CadastroContato({ navigation }) {
       <TextInput style={styles.input} />
       <br />
       <Button
-        title="Salvar"
+        title="Alterar"
+        onPress={() => navigation.navigate('ListaContatos')}
+      />
+      <br />
+      <Button
+        title="Excluir"
         onPress={() => navigation.navigate('ListaContatos')}
       />
     </View>
