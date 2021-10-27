@@ -1,36 +1,45 @@
-import * as React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Button, View, ScrollView } from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
+import axios from 'axios';
 
-function ListaContatos({ navigation }) {
+export default function ListaContatos({ navigation }) {
+  
+  const [dados,setDados] = useState([]);
+
+  useEffect(()=>{
+    function resgatarDados(){
+      axios('http://professornilson.com/testeservico/clientes')
+      .then((response) => setDados(response.data))
+      .catch(function (error){
+        console.log(error);
+      });
+    }
+    resgatarDados();
+  },[]);
+
   return (
-    <SafeAreaView style={styles.container}>
+
     <View>
-      <Text style={styles.title}>
-        Lista de Contatos
-      </Text>
+    <ScrollView>
+        {
+          dados.map((l, i) => (
+            <ListItem key={i} bottomDivider>
+              <Avatar source={{ uri: 'https://png.pngtree.com/png-vector/20190221/ourlarge/pngtree-female-user-vector-avatar-icon-png-image_691506.jpg' }} />
+              <ListItem.Content>
+                <ListItem.Title>{l.nome}</ListItem.Title>
+                <ListItem.Subtitle>{l.telefone}</ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
+          ))
+        }
+      </ScrollView>
+      <br />
       <Button
         title="Cadastro de Contato"
         onPress={() => navigation.navigate('CadastroContato')}
       />
     </View>
-  </SafeAreaView>
   );
+
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 16,
-  },
-  title: {
-    textAlign: 'center',
-    marginVertical: 8,
-  },
-  fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-});
-
-export default ListaContatos;
