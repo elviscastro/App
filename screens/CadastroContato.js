@@ -1,27 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput } from 'react-native';
 import axios from 'axios';
 
 export default function CadastroContato({ navigation }) {
 
-  const [nome,setNome] = useState("");
-  const [email,setEmail] = useState("");
-  const [telefone,setTelefone] = useState("");
+  const [emailUser,setEmail] = useState("");
+  const [nomeUser,setNome] = useState("");
+  const [telefoneUser,setTelefone] = useState("");
+
+  const contato={
+    nome: nomeUser,
+    email: emailUser,
+    telefone: telefoneUser
+  }
+
+  const handleChangeNome = (e) => setNome(e);
+  const handleChangeEmail = (e) => setEmail(e);
+  const handleChangeTelefone = (e) => setTelefone(e);
+
+  function addContato(contato){
+    axios.post("http://professornilson.com/testeservico/clientes",contato).then((response) => {
+      console.log('adicionado!')
+    }).catch(function (error){
+      console.log(error);
+    });
+  }
   
   return (
     <SafeAreaView style={styles.container}>
     <View>
       <Text style={styles.title}>nome</Text>
-      <TextInput style={styles.input} onChangeText={nome => setNome(nome)} />
+      <TextInput style={styles.input} onChangeText={handleChangeNome} />
       <Text style={styles.title}>email</Text>
-      <TextInput style={styles.input} onChangeText={email => setEmail(email)} />
+      <TextInput style={styles.input} onChangeText={handleChangeEmail} />
       <Text style={styles.title}>telefone</Text>
-      <TextInput style={styles.input} onChangeText={telefone => setTelefone(telefone)} />
+      <TextInput style={styles.input} onChangeText={handleChangeTelefone} />
       <br />
       <Button
         title="Salvar"
         onPress={() => {
-          axios.post('http://professornilson.com/testeservico/clientes',contato);
+          addContato(contato);
           navigation.navigate('ListaContatos');
         }}
       />
@@ -51,5 +70,10 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
