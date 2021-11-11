@@ -21,6 +21,10 @@ export default function ListaContatos({ navigation }) {
   return (
 
     <View>
+    <Button
+      title="Cadastro de Contato"
+      onPress={() => navigation.navigate('CadastroContato')}
+    />
     <ScrollView>
         {
           dados.map((l, i) => (
@@ -41,17 +45,7 @@ export default function ListaContatos({ navigation }) {
             </ListItem>
           ))
         }
-      </ScrollView>
-      <br />
-      <Button
-        title="Cadastro de Contato"
-        onPress={() => navigation.navigate('CadastroContato')}
-      />
-      <br />
-      <Button
-        title="Alterar/Excluir"
-        onPress={() => navigation.navigate('AlterarExcluirContato')}
-      />
+      </ScrollView>      
     </View>
   );
 
