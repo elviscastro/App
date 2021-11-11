@@ -24,7 +24,15 @@ export default function ListaContatos({ navigation }) {
     <ScrollView>
         {
           dados.map((l, i) => (
-            <ListItem key={i} bottomDivider>
+            <ListItem key={i} bottomDivider onPress={() => {
+              navigation.navigate('AlterarExcluirContato',{
+                id: l.id,
+                nome: l.nome,
+                cpf: l.cpf,
+                email: l.email,
+                telefone: l.telefone,
+              })
+            }}>
               <Avatar source={{ uri: 'https://png.pngtree.com/png-vector/20190221/ourlarge/pngtree-female-user-vector-avatar-icon-png-image_691506.jpg' }} />
               <ListItem.Content>
                 <ListItem.Title>{l.nome}</ListItem.Title>

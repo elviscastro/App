@@ -1,21 +1,48 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, TextInput } from 'react-native';
+import axios from 'axios';
 
 export default function CadastroContato({ navigation }) {
+
+  const [emailUser,setEmail] = useState("");
+  const [nomeUser,setNome] = useState("");
+  const [telefoneUser,setTelefone] = useState("");
+
+  const contato={
+    nome: nomeUser,
+    email: emailUser,
+    telefone: telefoneUser
+  }
+
+  const handleChangeNome = (e) => setNome(e);
+  const handleChangeEmail = (e) => setEmail(e);
+  const handleChangeTelefone = (e) => setTelefone(e);
+
+  function addContato(contato){
+    axios.post("http://professornilson.com/testeservico/clientes",contato).then((response) => {
+      console.log('adicionado!')
+    }).catch(function (error){
+      console.log(error);
+    });
+  }
   
   return (
     <SafeAreaView style={styles.container}>
     <View>
       <Text style={styles.title}>nome</Text>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} onChangeText={handleChangeNome} />
       <Text style={styles.title}>email</Text>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} onChangeText={handleChangeEmail} />
       <Text style={styles.title}>telefone</Text>
-      <TextInput style={styles.input} />
+      <TextInput style={styles.input} onChangeText={handleChangeTelefone} />
       <br />
       <Button
         title="Salvar"
-        onPress={() => navigation.navigate('ListaContatos')}
+        onPress={() => {
+          addContato(contato);
+          navigation.navigate('ListaContatos');
+        }}
       />
     </View>
   </SafeAreaView>
